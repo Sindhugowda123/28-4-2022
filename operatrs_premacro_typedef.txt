@@ -1,0 +1,564 @@
+===================  OPERATORS ========================
+
+Evaluate the expression in a step by step way based on operator precedence and associativity
+
+1) printf("%d\n",1==5==5);
+   -> 1 == 5 == 5
+   -> 0 == 5
+   FINAL O/P : 0
+   
+2) int i = 0;
+   printf("%d %d",i,i++);
+   -> i++ = 0
+   -> i = 1
+   FINAL O/P : 1 0
+   
+3) int x=5;
+   printf("%d %d %d\n",x++,x++,x++);
+   -> x++ = 5
+   -> x++ = 6
+   -> x++ = 7
+   FINAL O/P : 7 6 5
+   
+4) int x=2;
+   printf("%d   ",++x++);
+   -> x++ = 2
+   -> ++x++ = error : lvalue required
+   -> printf("%d\n",x++);
+   FIANL O/P : ERROR : LVALUE IS REQUIRED
+   
+5) int k = 1;
+   printf("%d==1 is ""%s\n",k,k==1?"TRUE":"FALSE");
+   -> k == 1?"TRUE":"FALSE" = "TRUE"
+   -> k = 1
+   -> %d = 1 => 1 == 1
+   -> %s = TRUE
+   FINAL O/P : 1 == 1 IS TRUE
+   
+6) int i = 5;
+   i = i++ - --i + ++i;
+   -> i = 5 - 5 + 6
+   -> i = 0 + 6
+   -> i = 6
+   
+7) int a = 7;
+   a += a += a -= 6;
+   -> a = a - 6
+   -> a = 7 - 6
+   -> a = 1
+   -> a = a + a
+   -> a = 1 + 1 = 2
+   -> a = a + a
+   -> a = 2 + 2
+   -> a = 4
+   printf("%d\n",a);
+   FINAL O/P : 4
+   
+8) int x = 10,y = 5,p,q;
+   p = x > 9;
+   q = p || (x = 5, y = 10);
+   -> p = 10 > 9
+   -> p = 1
+   -> q = p || ( x = 5, y = 10)
+   -> q = 1 || (x = 5, y = 10)    //Since first condition is true logical OR will not evaluate second condition. so x = 10 and y = 5 only
+   -> q = 1
+   -> q = 1
+   printf("%d %d %d\n",q,x,y);
+   FINAL O/P : 1 10 5
+   
+9) int x=2,y=1;
+   y += x <<= 2;
+   -> x = x << 2
+   -> x = 2 << 2
+   -> x = 8
+   -> y = y + x
+   -> y = 1 + 8
+   -> y = 9 
+   printf("%d %d\n",x,y);
+   FINAL O/P : 8 9 
+   
+10) int x=2,y=4,z;
+    z=y++*x++|y--;
+    -> z = 4 * 2 | 5
+    -> z = 8 | 5
+    -> z = 13
+    printf("%d\n",z);
+    FINAL O/P : 13
+    
+11) int a=5,b=6,c=7,d;
+    d=a&=b&=c&&a;
+    -> d = a &= b &= 7 && 5
+    -> d = a &= b &= 1
+    -> d = a &= b = b & 1
+    -> d = a &= b = 0
+    -> d = a = a & 0
+    -> d = a = 0
+    -> d = 0
+    printf("%d\n",d);
+    FINAL O/P : 0
+    
+12) int i=10;
+    i=(10<10)?(10>=10)?(10<=10)?1:2:3:4;
+    -> i = (10 < 10) ? (10 >= 10) ? 1:3:4
+    -> i = (10 < 10) ? 1 : 4
+    -> i = 4
+    printf("%d\n",i);
+    FINAL O/P : 4
+    
+13) int a=10,b=20;
+    a=(a>5||b=6?40:50);
+    -> a = ( 10 > 5 || b = 6 ? 40 : 50)
+    -> a = ( 1 || 20 = 6 ? 40 : 50)
+    -> 20 = 6 gives error because lvalue is required here, both cannot be constants
+    FINAL O/P : ERROR - LVALUE IS REQUIRED
+    
+14) printf("%x\n",-1>>4);
+    -> -1>>4
+    -> -1
+    -> -1 in decimal, But -1 in hexadecimal will be ffffffff
+    FINAL O/P : ffffffff
+    
+    printf("%x\n",-1<<4);
+    -> -1<<4
+    -> -16 in decimal
+    -> -16 in hexadecimal will be fffffff0
+    FINAL O/P : fffffff0
+    
+15) int x=7;
+    x=(x<<=x%2);
+    -> x = (x = 7 << 7 % 2)
+    -> x = (x = 7 << 1)
+    -> x = (x = 14)
+    -> x = 14
+    printf("%d\n",x);
+    FINAL O/P : 14
+    
+16) int a=2,b=5,c=1;
+    printf("%d\n",(b>=a>=c?1:0));
+    -> b >= a >= c ? 1 : 0
+    -> b >= 2 >= 1 ? 1 : 0
+    -> b >= 1
+    -> 5 >= 1
+    -> 1
+    FINAL O/P : 1
+    
+17) int a=5;
+    a=a-~a +1;
+    -> a = 5 - ~5 + 1
+    -> a = 5 - (-6) + 1
+    -> a = 5 + 6 + 1
+    -> a = 12
+    printf("%d\n",a);
+    FINAL O/P : 12
+    
+18) a=b=c=1;
+    x=--a||++b*(3-1)/2&&b*(--c/3);
+    -> x = --a || ++b * 2 / 2 && b * 0
+    -> x = 0 || 2 * 2 / 2 && 0
+    -> x = 0 || 4 / 2 && 0
+    -> x = 0 || 2 && 0
+    -> x = 2 && 0
+    -> x = 0
+    printf("%d\n",x);
+    FINAL O/P : 0
+    
+19) a=10
+    b = -5
+    c = 2.5
+    printf("%d %d",sizeof(a) + sizeof((++b) *c, b);
+    -> b = -5
+    -> sizeof(10) + sizeof(-4) * 2.5
+    -> 4 + 4 * 2.5
+    -> 4 + 10
+    -> 14
+    Since in printf %d is used to print 1st value -> it will print integer value of 14.000000
+    If it lf -> it will print 14.000000
+    and b = -5
+     
+20) int i=5;
+    i=i++ - i;
+    -> i = 5 - 6
+    -> i = -1   
+    printf("%d",i);
+    FINAL O/P : -1
+
+========================================= PREPROCESSORS AND MACROS ===========================
+
+1) What will be the output of the C program?
+#include<stdio.h>
+#define CONDITION(i)\
+printf("preprocessor works\n");                         
+int main()
+{
+	CONDITION(0);
+	return 0;
+}
+O/P : preprocessor works 
+Here we use multiline macro, so CONDITION(0) will be substituted with printf statement in pre-processing stage.
+
+2) What will be the output of the C program?
+#include<stdio.h>
+# define loop while(true)
+int main()
+{
+	loop;  
+	printf("preprocessor-aptitude");
+	return 0;
+}
+O/P : error : true undeclared
+Here,loop will be substitued with while(true),since true is not declared in the program so error output.
+
+3) What will be the output of the C program?
+#include<stdio.h>
+# define x --5
+int main()
+{
+	printf("%d",x);
+	return 0;
+}
+O/P : error:lvalue required as decrement operand.
+Left hand side expression is needed, means we can't use constant for decrement and increment operators.
+
+4) What will be the output of the C program ?
+#include<stdio.h>
+#define sqr(x) ++x * ++x
+int main()
+{
+	int a = 3, z;
+	z = ++a * ++a;     
+	a -= 3;
+	printf("%d %d", sqr(a), z);
+	return 0;
+}
+O/P : z = ++a * ++a 
+      ++a = 4, ++a = 5
+      z = 5 * 5 = 25
+      a = 5 - 3 = 2
+      sqr(a) = ++a * ++a
+      ++a = 3, ++a = 4 
+      = 4 * 4 = 16
+      It prints 16, 25
+
+5) What will be the output of the C program?
+#include<stdio.h>                      
+#define x 1+2
+int main()
+{
+	int i;
+	i = x * x * x;
+	printf("%d",i);
+}
+O/P: i = 1+2*1+2*1+2
+        = 1+2+2+2
+        = 7
+
+6) What will be the output of the C program?
+#include<stdio.h>
+#define a =
+int main()
+{
+	int num a 6;
+	printf("%d",num);
+	return 0;
+}
+O/P : a will be replaced with =
+      so, num = 6
+      it prints num value, 6
+
+7) What will be the output of the C program?        
+#include<stdio.h>
+#define fun(x,y) x*y
+int main()
+{
+	int x = 2, y = 1;
+	printf("%d",fun(x + 2, y - 1));  
+	return 0;
+}
+O/P :   2+2*1-1 = 2+2-1 = 3 
+
+8) What will be the output of the C program?
+#include<stdio.h>
+int main()
+{
+	char TIME[15] = "Current Date";
+	printf("%s\n",__DATE__);
+	return 0;
+}
+O/P : __DATE__ is preprocessor macro that will expand to current date in the compile time, 
+so, current month date year will be printed as a string.
+Apr 28 2022 
+
+9) What will be the output of the C program?
+#include<stdio.h>
+int main()
+{
+	char TIME[15] = "Current Time";
+	printf("%s\n",__TIME__);
+	return 0;
+}
+O/P : __TIME__ is preprocessor macro that will expand to current time in the compile time, 
+so, current hour minute seconds will be printed as a string.
+11:59:55
+
+10) What will be the output of the C program?
+#include<stdio.h>
+int main()
+{	
+	printf("Line :%d\n", __LINE__ );
+	return 0;
+}
+O/P : __LINE__ is preprocessor macro that will expand to current line number in the current file, 
+so, current line number will be printed as a integer.
+Line : 4
+
+11) What will be the output of the C program?
+#include<stdio.h>
+#define  preprocessor_works(x, y)  \
+printf(#x " and " #y " are great!\n")
+int main(void)
+{
+	preprocessor_works(you, me);
+	return 0;
+}
+O/P : Multiline macro, #x and #y will be replaced with you and me.
+      SO, preprocessor_works(you, me) will be replaced with printf statement,
+          it prints, you and me are great!. 
+
+12) What will be the output of the C program?
+#include<stdio.h>
+# define puts  "%s C preprocessor"
+int main()
+{
+	printf(puts, puts);
+	return 0;
+}
+O/P : printf(%s C preprocessor, %s C preprocessor)
+      So, first %s takes %s C preprocessor then C preprocessor will print.
+          it prints, %s C preprocessor C preprocessor
+
+13) What will be the output of the C program?
+#include<stdio.h>
+#define preprocessor(n) printf ("macro" #n " = %d", macro##n)
+int main(void)
+
+{
+	int macro25 = 47;
+	preprocessor(25); //printf("macro25=%d",macro25)
+	return 0;
+}
+O/P : macro25=47 
+
+14) What will be the output of the C program?
+#include<stdio.h>
+#include<string.h>
+#define MACRO(num) ++num 
+int main()
+{
+	char *ptr = "preprocessor";
+	int num =strlen(ptr);
+	printf("%s  ", MACRO(ptr)); //%s takes reprocessor since ++num
+	printf("%d", MACRO(num));  //num=strlen(ptr+) = 12, ++num =13
+	return 0;
+}
+O/P : reprocessor 13
+
+15) What will be the output of the C program?
+#include<stdio.h>
+#define i 10
+int main()
+{
+	#define i 20        //error
+	printf("%d",i);
+	return 0;
+}
+O/P : redifinition of i results in compile time error
+
+16) What will be the output of the C program?
+#include<stdio.h>
+#define clrscr() 50
+int main()
+{
+	clrscr();                    //50
+	printf("%d\n",clrscr());     //prints 50
+	return 0;
+}
+O/P : 50
+
+17) What will be the output of the C program?
+#include<stdio.h>
+#define int char
+main()
+{
+	int i=5;
+	printf ("sizeof (i) =%d", sizeof (i)); //warning since sizeof() operator needs %ld 
+}
+O/P : sizeof(i) =1
+
+18) Write programs to understand the usage of below preprocessor directives.
+#include, #if, #ifdef, #ifndef, #else, #elif, #endif, #define, #undef, #line, #error, and #pragma
+i)#include
+#include<stdio.h>
+int main()
+{
+    int i=5;
+    i=i++ - i;
+    printf("%d\n", i);
+}
+O/P : -1
+
+ii)#if #else #endif #define
+#define PIC 1
+int main()
+{
+#if PIC 
+printf("PIC microcontroller\n");
+#else
+printf("ATMEL microcontroller\n");
+#endif
+}
+O/P : PIC microcontroller
+
+iii) #ifdef 
+#define PIC 1
+int main()
+{
+#ifdef PIC 
+printf("PIC microcontroller\n");
+#else
+printf("ATMEL microcontroller\n");
+#endif
+}
+O/P : PIC microcontroller
+
+iV) #ifndef
+#define PIC 1
+int main()
+{
+#ifndef PIC 
+printf("PIC microcontroller\n");
+#else
+printf("ATMEL microcontroller\n");
+#endif
+}
+O/P : ATMEL microcontroller
+
+v)#elif
+#define PIC 0
+int main()
+{
+#if PIC 
+printf("PIC microcontroller\n");
+#elif PIC
+printf("ATMEL microcontroller\n");
+#else
+printf("Hi\n");
+#endif
+}
+O/P : Hi
+
+vi)#undef
+#define PIC 0
+int main()
+{
+#undef PIC 
+printf("PIC");
+}
+O/P : PIC
+
+vii)#line
+#include <stdio.h>
+int main()
+{
+#line 5
+    printf( "Set to line number %d in file %s\n", __LINE__, __FILE__ );// __LINE__ = 5, __FILE__ = takes current file
+#line 8
+    printf( "Set to line number %d in file %s\n", __LINE__, __FILE__ );// __LINE__ = 10, __FILE__ = takes current file
+}
+
+O/P : Set to line number 5 in file m25.c(current file)
+      Set to line number 8 in file m25.c
+
+viii)#error
+#include<stdio.h>
+#define BUFFER_SIZE 255
+
+#if BUFFER_SIZE < 256
+#error "BUFFER_SIZE is too small."
+#endif
+O/P : BUFFER_SIZE it too small
+
+ix)#pragma
+#include<stdio.h>
+#pragma pack(1)               //with #pragma pack(1) -> size = 12, without #pragma pack(1) -> size = 16 
+typedef struct Rect
+{
+	char ch1;
+        int a;
+        short s;
+        char ch2;
+        int b;
+}s;
+int main()
+{
+printf("%ld \n", sizeof(s));
+}
+O/P : 12
+===================================== TYPEDEF =========================================
+
+1) In the following code, the P2 is Integer Pointer or Integer?
+typedef int *ptr;
+ptr p1, p2;
+Ans : Integer pointer
+
+2)  In the following code what is 'P'?
+typedef char *charp;
+const charp P;
+Ans : p is constant character pointer
+
+3) What is x in the following program?
+#include<stdio.h>
+int main()
+{
+    typedef char (*(*arrfptr[3])())[10];
+    arrfptr x;
+    return 0;
+}
+Ans : x is an array of 3 function pointers 
+
+4) What is apfArithmatics in the below statement?
+typedef int (*apfArithmatics[3])(int,int); 
+Ans : apfArithmatics is a array of 3 function pointer having arguments of type int,int and with return type int
+
+5) What is pf in the below statement?
+typedef int (*pf)(int);
+Ans : pf is a function pointer having one argument of type int
+
+6) What do the following declarations mean?
+typedef char *pc; //pc is a pointer to char 
+typedef pc fpc(); //fpc() is a function which returns pointer to char
+typedef fpc *pfpc; //pfpc is a pointer to the function that returns pointer to char 
+typedef pfpc fpfpc(); //fpfpc() is a function which returns pointer to function which in turn returns a pointer to char
+typedef fpfpc *pfpfpc; //pfpfpc is a pointer to the function which returns a pointer to a function which in turns returns a pointer to char
+pfpfpc a[N]; //a is an array of N pointers to a function which returns a pointer to a function that takes no arguments and returns a pointer to char
+
+7) Write few programs using typedef on structures and enums.
+#include<stdio.h>
+enum status
+{
+FALSE,
+TRUE
+};
+typedef enum status stat_t;
+stat_t fun()
+{
+if(1)
+return TRUE;
+else
+return FALSE;
+}
+int main()
+{
+    int ret = fun();
+    printf("%d\n", ret);
+}
+O/T : 1

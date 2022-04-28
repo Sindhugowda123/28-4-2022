@@ -1,0 +1,127 @@
+1.Create a list with 3 nodes having int data in single Linked list data : 100,200,300
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+		int data;
+		struct node *link;
+}slist;
+slist *head = NULL;
+void insert(int data)
+{
+		slist *new = malloc(sizeof(slist));
+		if(new == NULL)
+		{
+				printf("Memory is not allocated\n");
+		}
+		else
+		{		
+				new->data = data;
+				new->link = NULL;
+		if(head == NULL)
+		{
+				head = new;
+		}
+		else
+			{
+					slist *temp = head;
+					while(temp->link != NULL)
+					{
+							temp = temp->link;
+					}
+					temp->link = new;
+			}
+		}
+}
+void display()
+{
+		slist *temp = head;
+		if(head == NULL)
+		{
+				printf("List is empty\n");
+		}
+		else
+		{
+		while(temp != NULL)
+		{
+				printf("Inserted element is %d ", temp->data);
+				temp = temp->link;
+		                printf("\n");
+                }
+        }
+}
+int main()
+{
+		insert(100);
+                insert(200);
+                insert(300);
+		display();
+}
+
+2.Create a circular LL with 5 nodes having char data - vowels - a,e,i,o,u
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+		char data;
+		struct node *link;
+}slist;
+slist *head = NULL;
+void insert(char data)
+{
+		slist *new = malloc(sizeof(slist));
+		if(new == NULL)
+		{
+				printf("Memory is not allocated\n");
+		}
+		else
+		{		
+				new->data = data;
+				if(head == NULL)
+				{
+						head = new;
+						new->link = head;
+				}
+				else
+				{
+						slist *temp = head;
+						while(temp->link != head)
+						{
+								temp = temp->link;
+						}
+						temp->link = new;
+						new->link = head;
+				}
+		}
+}
+
+void display()
+{
+		slist *temp = head;
+		if(head == NULL)
+		{
+				printf("List is empty\n");
+		}
+		else
+		{
+				printf("The circular list is : ");
+				do
+				{
+						printf("%c ", temp->data);
+						temp = temp->link;
+				}while(temp != head);
+                                printf("\n");
+		}
+}
+
+int main()
+{
+	        insert('a');
+                insert('e');
+                insert('i');
+                insert('o');
+                insert('u');
+		display();
+}
+
+
